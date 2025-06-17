@@ -25,4 +25,18 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+// UPDATE kreneg  ID  se paramse se id aayengi and body se data 
+router.put('/:id', (req, res) => {
+  const { title, content } = req.body;
+  db.query(
+    'UPDATE blogs SET title = ?, content = ? WHERE id = ?',
+    [title, content, req.params.id],
+    (err, result) => {
+      if (err) return res.status(500).send(err);
+      res.json({ message: 'Blog updated successfully' });
+    }
+  );
+});
+
+
 module.exports = router;
